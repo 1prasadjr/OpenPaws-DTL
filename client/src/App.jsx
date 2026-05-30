@@ -755,10 +755,6 @@ function App() {
               <span className="material-symbols-outlined text-[20px]">help_outline</span>
               <span className="text-sm font-medium">Support</span>
             </button>
-            <button type="button" onClick={() => goToPath('/')} className="glass-action w-full justify-start px-4 py-2.5 text-left text-text-soft">
-              <span className="material-symbols-outlined text-[20px]">logout</span>
-              <span className="text-sm font-medium">Sign Out</span>
-            </button>
           </div>
         </aside>
 
@@ -922,9 +918,7 @@ function DashboardView({ dashboard, recentDonationCount, onViewAllRecords }) {
             <h2 className="text-3xl font-semibold tracking-tight text-text-main md:text-[2.7rem]">
               A cleaner command surface for donation review.
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-text-soft md:text-base">
-              A tighter sidebar, a precise top bar, and fewer visual distractions keep the workflow focused on records, reviews, and draft approval.
-            </p>
+            
           </div>
           <div className="flex flex-wrap gap-3">
             <button type="button" onClick={onViewAllRecords} className="glass-action glass-action-accent px-5 py-3 text-sm font-semibold">
@@ -962,7 +956,6 @@ function DashboardView({ dashboard, recentDonationCount, onViewAllRecords }) {
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-lg font-semibold text-text-main">Recent activity</div>
-                <div className="text-sm text-text-soft">Latest donations synced from the backend.</div>
               </div>
               <button type="button" onClick={onViewAllRecords} className="glass-action px-4 py-2 text-sm">
                 View all
@@ -1021,12 +1014,9 @@ function CreateDonationView({ form, onChange, onFillSample, onSubmit, submission
   return (
     <div className="grid gap-5">
       <GlassCard className="p-6 md:p-8 xl:p-10">
-        <div className="mb-5 flex items-start justify-between gap-4 border-b border-line pb-5">
+            <div className="mb-5 flex items-start justify-between gap-4 border-b border-line pb-5">
           <div>
             <div className="text-xl font-semibold text-text-main">Simulate donation</div>
-            <div className="mt-1 text-sm text-text-soft">
-              Build a synthetic donation record that will flow into the backend records table.
-            </div>
           </div>
           <button type="button" onClick={onFillSample} className="glass-action px-4 py-2 text-sm">
             Fill sample data
@@ -1083,9 +1073,7 @@ function CreateDonationView({ form, onChange, onFillSample, onSubmit, submission
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5">
-            <div className="max-w-xl text-sm text-text-soft">
-              This form only creates synthetic test data. Draft generation and email sending stay separate.
-            </div>
+            <div />
             <button type="submit" className="glass-action glass-action-accent px-5 py-3 text-sm font-semibold">
               {submission.state === 'saving' ? 'Saving…' : 'Create test donation'}
               <span className="material-symbols-outlined text-[18px]">send</span>
