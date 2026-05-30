@@ -723,10 +723,7 @@ function App() {
             </div>
           </div>
 
-          <button type="button" onClick={() => goToPath('/create')} className="glass-action mb-4 px-4 py-2.5 text-sm">
-            <span className="material-symbols-outlined text-[18px]">add</span>
-            New Campaign
-          </button>
+          
 
           <nav className="flex-1 space-y-1 overflow-hidden">
             {pages.map((item) => {
