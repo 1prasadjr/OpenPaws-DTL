@@ -199,7 +199,9 @@ Below are the screenshots referenced in the visual notes. If you prefer these st
 
 ![Draft Review Queue](./Screenshot%202026-05-30%20161240.png)
 
-![Thank-you Email Preview (mobile)](./WhatsApp%20Image%202026-05-30%20at%204.13.50%20PM.jpeg)
+<div align="center">
+  <img src="./WhatsApp%20Image%202026-05-30%20at%204.13.50%20PM.jpeg" alt="Thank-you Email Preview (mobile)" width="320" />
+</div>
 
 ## Data Model Summary
 
