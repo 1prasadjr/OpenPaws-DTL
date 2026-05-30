@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Draft Review Queue - StewardshipAI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 10, 12, 0.5); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1); 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2); 
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#010f1f",
+                        "surface-glass": "rgba(30, 41, 59, 0.7)",
+                        "inverse-surface": "#d4e4fa",
+                        "on-tertiary-container": "#31394d",
+                        "on-surface-variant": "#bbcabf",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "tertiary": "#bec6e0",
+                        "on-secondary": "#233144",
+                        "secondary-container": "#3c4a5e",
+                        "on-tertiary": "#283044",
+                        "surface-bright": "#2c3a4c",
+                        "on-surface": "#d4e4fa",
+                        "status-error": "#ef4444",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "secondary": "#b9c7e0",
+                        "surface-tint": "#4edea3",
+                        "tertiary-container": "#9ba2bb",
+                        "background": "#051424",
+                        "on-primary-container": "#00422b",
+                        "on-primary-fixed": "#002113",
+                        "primary-container": "#10b981",
+                        "surface-dim": "#051424",
+                        "surface-container-highest": "#273647",
+                        "status-info": "#3b82f6",
+                        "inverse-primary": "#006c49",
+                        "primary": "#4edea3",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#1c2b3c",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "inverse-on-surface": "#233143",
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#0d1c2d",
+                        "status-success": "#22c55e",
+                        "outline": "#86948a",
+                        "surface-variant": "#273647",
+                        "status-warning": "#f59e0b",
+                        "on-tertiary-fixed": "#131b2e",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "on-primary": "#003824",
+                        "tertiary-fixed": "#dae2fd",
+                        "primary-fixed": "#6ffbbe",
+                        "on-primary-fixed-variant": "#005236",
+                        "border-highlight": "rgba(255, 255, 255, 0.12)",
+                        "background-base": "#0a0a0c",
+                        "outline-variant": "#3c4a42",
+                        "secondary-fixed": "#d5e3fd",
+                        "surface-container": "#122131",
+                        "on-secondary-container": "#abb9d2",
+                        "surface": "#051424",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "on-background": "#d4e4fa",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-error": "#690005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-width": "280px",
+                        "component-padding": "1rem",
+                        "section-padding": "2rem",
+                        "panel-gap": "1.5rem",
+                        "canvas-margin": "2rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Geist", "sans-serif"],
+                        "headline-sm": ["Geist", "sans-serif"],
+                        "label-sm": ["JetBrains Mono", "monospace"],
+                        "label-md": ["JetBrains Mono", "monospace"],
+                        "headline-lg": ["Geist", "sans-serif"],
+                        "body-md": ["Geist", "sans-serif"],
+                        "body-lg": ["Geist", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["28px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "500" }],
+                        "label-md": ["13px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background-base text-on-surface font-body-md min-h-screen flex antialiased selection:bg-primary/30 selection:text-primary-fixed">
+<!-- Ambient Background Glow -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-surface-container-low/40 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-surface-container-lowest/60 rounded-full blur-[150px]"></div>
+</div>
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col h-screen py-8 border-r border-border-highlight fixed left-0 top-0 w-sidebar-width bg-surface-glass backdrop-blur-xl shadow-2xl z-40">
+<!-- Header -->
+<div class="px-6 mb-10">
+<div class="flex items-center gap-4 mb-2">
+<div class="w-10 h-10 rounded bg-gradient-to-br from-surface-container to-surface flex items-center justify-center border border-border-highlight shadow-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface m-0 leading-tight">Global Giving</h1>
+<p class="font-label-sm text-label-sm text-primary uppercase tracking-widest mt-1">Premium Tier</p>
+</div>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-6 mb-8">
+<button class="w-full flex items-center justify-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 font-label-md text-label-md py-2.5 px-4 rounded transition-all duration-200">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Campaign
+            </button>
+</div>
+<!-- Main Navigation -->
+<div class="flex-1 overflow-y-auto">
+<ul class="flex flex-col gap-1">
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-6 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-6 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+                        Create Test Donation
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-6 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                        Donation Records
+                    </a>
+</li>
+<!-- ACTIVE TAB -->
+<li>
+<a class="flex items-center gap-3 bg-primary/10 text-primary border-r-4 border-primary px-6 py-3 shadow-[0_0_15px_rgba(78,222,163,0.15)] font-label-md text-label-md translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rate_review</span>
+                        Draft Review Queue
+                    </a>
+</li>
+</ul>
+</div>
+<!-- Footer Navigation -->
+<div class="mt-auto px-6 pt-6 border-t border-border-highlight/50">
+<ul class="flex flex-col gap-1">
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-2 py-2 hover:text-on-surface hover:bg-white/5 transition-all duration-200 font-label-md text-label-md rounded" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+                        Support
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-2 py-2 hover:text-on-surface hover:bg-white/5 transition-all duration-200 font-label-md text-label-md rounded" href="#">
+<span class="material-symbols-outlined">logout</span>
+                        Sign Out
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-sidebar-width p-section-padding z-10 min-w-0 max-w-[1600px] mx-auto w-full flex flex-col gap-panel-gap">
+<!-- Page Header & Actions -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-border-highlight/30">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="inline-flex items-center justify-center w-8 h-8 rounded bg-surface-container border border-border-highlight">
+<span class="material-symbols-outlined text-primary text-[18px]">mark_email_unread</span>
+</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface m-0">Review Queue</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+                    Review and approve AI-generated stewardship notes. Items flagged with "Uncertain" match confidence require closer human attention before dispatch.
+                </p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-glass backdrop-blur-md border border-border-highlight rounded text-on-surface hover:bg-white/5 transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                    More Filters
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary font-bold rounded font-label-md text-label-md shadow-[0_0_20px_rgba(78,222,163,0.3)] hover:bg-primary-fixed hover:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined text-[18px]">send_time_extension</span>
+                    Batch Approve (12)
+                </button>
+</div>
+</header>
+<!-- Filter Bar (Glass Panel) -->
+<section class="bg-surface-glass backdrop-blur-xl border border-border-highlight rounded-xl p-4 flex flex-col sm:flex-row gap-4 items-center shadow-lg relative overflow-hidden">
+<!-- Subtle internal gradient for glass depth -->
+<div class="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none"></div>
+<div class="relative w-full sm:w-80 z-10">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container-low/50 border border-outline-variant rounded-lg pl-10 pr-4 py-2.5 text-on-surface font-body-md placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all bg-transparent backdrop-blur-sm" placeholder="Search donor or ID..." type="text"/>
+</div>
+<div class="flex items-center gap-4 w-full sm:w-auto z-10">
+<div class="relative min-w-[160px]">
+<select class="w-full bg-surface-container-low/50 border border-outline-variant rounded-lg pl-4 pr-10 py-2.5 text-on-surface font-label-md appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all cursor-pointer backdrop-blur-sm">
+<option value="all">All Campaigns</option>
+<option value="end_of_year">End of Year 2024</option>
+<option value="capital">Capital Campaign</option>
+<option value="scholarship">Scholarship Fund</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="relative min-w-[180px]">
+<select class="w-full bg-surface-container-low/50 border border-outline-variant rounded-lg pl-4 pr-10 py-2.5 text-on-surface font-label-md appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all cursor-pointer backdrop-blur-sm">
+<option value="pending">Status: Pending Review</option>
+<option value="approved">Status: Approved</option>
+<option value="flagged">Status: Flagged</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</section>
+<!-- Data Table Panel (Glassmorphism Card) -->
+<section class="bg-surface-glass backdrop-blur-xl border border-border-highlight rounded-xl shadow-2xl flex-1 flex flex-col overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none z-0"></div>
+<div class="overflow-x-auto z-10">
+<table class="w-full text-left border-collapse whitespace-nowrap">
+<thead class="bg-surface-container-low/80 backdrop-blur-2xl border-b border-border-highlight sticky top-0 z-20">
+<tr>
+<th class="p-component-padding font-label-md text-label-md text-on-surface-variant uppercase tracking-widest font-semibold">Donor Name</th>
+<th class="p-component-padding font-label-md text-label-md text-on-surface-variant uppercase tracking-widest font-semibold">Gift Amount</th>
+<th class="p-component-padding font-label-md text-label-md text-on-surface-variant uppercase tracking-widest font-semibold">Campaign</th>
+<th class="p-component-padding font-label-md text-label-md text-on-surface-variant uppercase tracking-widest font-semibold">Match Confidence</th>
+<th class="p-component-padding font-label-md text-label-md text-on-surface-variant uppercase tracking-widest font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-highlight/30">
+<!-- Row 1: High Confidence -->
+<tr class="hover:bg-white/5 transition-colors duration-150 group">
+<td class="p-component-padding">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border border-border-highlight flex items-center justify-center text-on-surface font-headline-sm text-headline-sm uppercase shadow-inner">
+                                        ER
+                                    </div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface group-hover:text-primary transition-colors">Eleanor Roosevelt</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[12px]">star</span> Major Donor
+                                        </div>
+</div>
+</div>
+</td>
+<td class="p-component-padding font-body-md text-body-md text-on-surface font-medium">
+                                $25,000.00
+                            </td>
+<td class="p-component-padding font-body-md text-body-md text-on-surface-variant">
+                                End of Year 2024
+                            </td>
+<td class="p-component-padding">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-status-success/10 border border-status-success/30 text-status-success font-label-sm text-label-sm shadow-[0_0_10px_rgba(34,197,94,0.1)]">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                    High
+                                </span>
+</td>
+<td class="p-component-padding text-right">
+<button class="inline-flex items-center gap-2 px-4 py-2 bg-transparent hover:bg-surface-container border border-outline-variant hover:border-border-highlight rounded text-on-surface font-label-md text-label-md transition-all">
+                                    Review Draft
+                                    <span class="material-symbols-outlined text-[18px]">edit_document</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Medium Confidence -->
+<tr class="hover:bg-white/5 transition-colors duration-150 group">
+<td class="p-component-padding">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border border-border-highlight flex items-center justify-center text-on-surface font-headline-sm text-headline-sm uppercase shadow-inner">
+                                        JM
+                                    </div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface group-hover:text-primary transition-colors">James Madison</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[12px]">history</span> Returning
+                                        </div>
+</div>
+</div>
+</td>
+<td class="p-component-padding font-body-md text-body-md text-on-surface font-medium">
+                                $1,500.00
+                            </td>
+<td class="p-component-padding font-body-md text-body-md text-on-surface-variant">
+                                Annual Fund
+                            </td>
+<td class="p-component-padding">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-status-warning/10 border border-status-warning/30 text-status-warning font-label-sm text-label-sm shadow-[0_0_10px_rgba(245,158,11,0.1)]">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                                    Medium
+                                </span>
+</td>
+<td class="p-component-padding text-right">
+<button class="inline-flex items-center gap-2 px-4 py-2 bg-transparent hover:bg-surface-container border border-outline-variant hover:border-border-highlight rounded text-on-surface font-label-md text-label-md transition-all">
+                                    Review Draft
+                                    <span class="material-symbols-outlined text-[18px]">edit_document</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Uncertain (Low) Confidence - Warning State -->
+<tr class="bg-status-error/5 hover:bg-status-error/10 transition-colors duration-150 group border-l-2 border-l-status-error relative">
+<td class="p-component-padding">
+<div class="flex items-center gap-3 pl-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border border-status-error/30 flex items-center justify-center text-on-surface font-headline-sm text-headline-sm uppercase shadow-inner">
+                                        SW
+                                    </div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface flex items-center gap-2">
+                                            Sarah Walker
+                                            <span class="material-symbols-outlined text-status-error text-[16px]" title="Context mismatch detected">warning</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+                                            First-time Donor
+                                        </div>
+</div>
+</div>
+</td>
+<td class="p-component-padding font-body-md text-body-md text-on-surface font-medium">
+                                $10,000.00
+                            </td>
+<td class="p-component-padding font-body-md text-body-md text-on-surface-variant">
+                                Unrestricted
+                            </td>
+<td class="p-component-padding">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-status-error/10 border border-status-error/30 text-status-error font-label-sm text-label-sm shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                                    Uncertain
+                                </span>
+</td>
+<td class="p-component-padding text-right">
+<!-- Urgent Action Button -->
+<button class="inline-flex items-center gap-2 px-4 py-2 bg-status-error/10 hover:bg-status-error/20 border border-status-error/50 rounded text-status-error font-label-md text-label-md transition-all shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+                                    Manual Review
+                                    <span class="material-symbols-outlined text-[18px]">rule</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: High Confidence -->
+<tr class="hover:bg-white/5 transition-colors duration-150 group">
+<td class="p-component-padding">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border border-border-highlight flex items-center justify-center text-on-surface font-headline-sm text-headline-sm uppercase shadow-inner">
+                                        TB
+                                    </div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface group-hover:text-primary transition-colors">Thomas Builder</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[12px]">corporate_fare</span> Corporate Match
+                                        </div>
+</div>
+</div>
+</td>
+<td class="p-component-padding font-body-md text-body-md text-on-surface font-medium">
+                                $5,000.00
+                            </td>
+<td class="p-component-padding font-body-md text-body-md text-on-surface-variant">
+                                Capital Campaign
+                            </td>
+<td class="p-component-padding">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-status-success/10 border border-status-success/30 text-status-success font-label-sm text-label-sm shadow-[0_0_10px_rgba(34,197,94,0.1)]">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                    High
+                                </span>
+</td>
+<td class="p-component-padding text-right">
+<button class="inline-flex items-center gap-2 px-4 py-2 bg-transparent hover:bg-surface-container border border-outline-variant hover:border-border-highlight rounded text-on-surface font-label-md text-label-md transition-all">
+                                    Review Draft
+                                    <span class="material-symbols-outlined text-[18px]">edit_document</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Footer (Glass stylistic) -->
+<div class="mt-auto p-4 border-t border-border-highlight/30 bg-surface-container-low/30 backdrop-blur-md flex items-center justify-between text-on-surface-variant font-label-md text-label-md z-10">
+<div>Showing 1-4 of 42 pending reviews</div>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-white/5 hover:text-on-surface transition-colors opacity-50 cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-white/5 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+</body></html>

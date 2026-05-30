@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StewardshipAI - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#010f1f",
+                      "surface-glass": "rgba(30, 41, 59, 0.7)",
+                      "inverse-surface": "#d4e4fa",
+                      "on-tertiary-container": "#31394d",
+                      "on-surface-variant": "#bbcabf",
+                      "tertiary-fixed-dim": "#bec6e0",
+                      "tertiary": "#bec6e0",
+                      "on-secondary": "#233144",
+                      "secondary-container": "#3c4a5e",
+                      "on-tertiary": "#283044",
+                      "surface-bright": "#2c3a4c",
+                      "on-surface": "#d4e4fa",
+                      "status-error": "#ef4444",
+                      "secondary-fixed-dim": "#b9c7e0",
+                      "secondary": "#b9c7e0",
+                      "surface-tint": "#4edea3",
+                      "tertiary-container": "#9ba2bb",
+                      "background": "#051424",
+                      "on-primary-container": "#00422b",
+                      "on-primary-fixed": "#002113",
+                      "primary-container": "#10b981",
+                      "surface-dim": "#051424",
+                      "surface-container-highest": "#273647",
+                      "status-info": "#3b82f6",
+                      "inverse-primary": "#006c49",
+                      "primary": "#4edea3",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-high": "#1c2b3c",
+                      "on-secondary-fixed-variant": "#3a485c",
+                      "inverse-on-surface": "#233143",
+                      "error": "#ffb4ab",
+                      "surface-container-low": "#0d1c2d",
+                      "status-success": "#22c55e",
+                      "outline": "#86948a",
+                      "surface-variant": "#273647",
+                      "status-warning": "#f59e0b",
+                      "on-tertiary-fixed": "#131b2e",
+                      "on-tertiary-fixed-variant": "#3f465c",
+                      "on-primary": "#003824",
+                      "tertiary-fixed": "#dae2fd",
+                      "primary-fixed": "#6ffbbe",
+                      "on-primary-fixed-variant": "#005236",
+                      "border-highlight": "rgba(255, 255, 255, 0.12)",
+                      "background-base": "#0a0a0c",
+                      "outline-variant": "#3c4a42",
+                      "secondary-fixed": "#d5e3fd",
+                      "surface-container": "#122131",
+                      "on-secondary-container": "#abb9d2",
+                      "surface": "#051424",
+                      "on-secondary-fixed": "#0d1c2f",
+                      "on-background": "#d4e4fa",
+                      "error-container": "#93000a",
+                      "primary-fixed-dim": "#4edea3",
+                      "on-error": "#690005"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sidebar-width": "280px",
+                      "component-padding": "1rem",
+                      "section-padding": "2rem",
+                      "panel-gap": "1.5rem",
+                      "canvas-margin": "2rem"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "headline-sm": [
+                              "Geist"
+                      ],
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "label-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "28px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-md": [
+                              "13px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "15px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0a0a0c;
+            background-image: radial-gradient(circle at 100% 0%, #0d1c2d 0%, transparent 40%), radial-gradient(circle at 0% 100%, #0d1c2d 0%, transparent 40%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #d4e4fa;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .text-glow {
+            text-shadow: 0 0 15px rgba(78, 222, 163, 0.5);
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden font-body-md text-body-md">
+<!-- SideNavBar -->
+<nav class="bg-surface-glass backdrop-blur-xl border-r border-border-highlight shadow-2xl flex flex-col h-screen py-8 border-r border-border-highlight fixed left-0 top-0 h-full w-sidebar-width z-40 hidden md:flex">
+<div class="px-section-padding mb-8 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-border-highlight overflow-hidden">
+<span class="material-symbols-outlined text-primary" data-icon="volunteer_activism">volunteer_activism</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface">Global Giving</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Premium Tier</p>
+</div>
+</div>
+<div class="px-component-padding mb-6">
+<button class="w-full py-2 px-4 bg-primary text-on-primary font-label-md text-label-md rounded-DEFAULT flex items-center justify-center gap-2 hover:bg-primary-fixed transition-colors shadow-[0_0_15px_rgba(78,222,163,0.3)]">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                New Campaign
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 bg-primary/10 text-primary border-r-4 border-primary px-4 py-3 shadow-[0_0_15px_rgba(78,222,163,0.15)] font-label-md text-label-md translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" data-weight="fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                        Create Test Donation
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                        Donation Records
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+                        Draft Review Queue
+                    </a>
+</li>
+</ul>
+</div>
+<div class="mt-auto px-4 border-t border-border-highlight pt-4 space-y-1">
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Sign Out
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-sidebar-width flex flex-col h-screen overflow-hidden">
+<!-- Header -->
+<header class="h-20 px-section-padding flex items-center justify-between shrink-0 glass-panel border-b border-border-highlight z-30 sticky top-0 w-full">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Dashboard</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Synthetic Data Mode</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-status-error rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-border-highlight">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A close up portrait photo of a professional woman in a modern office environment. The lighting is soft and natural, creating a premium corporate aesthetic. Deep shadows provide a subtle dark mode contrast, perfect for a high-end SaaS dashboard avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvazgdCFrMbrv4b209VYJLyfnSnYG3Wwtxi4myyaXc2mg_tjO7EuJOf1a0a-JKkGMhrQUTQgKBOoRpfjHVyGGthBOmG7KvPD0o-JZwf1PZOYHQvua7zwuKDgX7QZXOtFRhojz8k1TCiI-2hz2rdf5LslnSx-AOpQj6ghQEKWTjZ7j4a2HHA65l245vYP60pV7Frw1YSX7r9OnL0V0YwxvrRwRitubuzmBtp_qziWWRL4Pd6gBiW8ym8Al73NJrUAc_AMBaeq-jrh0"/>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-canvas-margin space-y-panel-gap">
+<!-- Metrics Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-panel-gap">
+<!-- Metric 1 -->
+<div class="glass-card rounded-xl p-component-padding hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">New Donations</span>
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="payments">payments</span>
+</div>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mb-1">124</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-status-success">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+                        +12% this week
+                    </div>
+</div>
+<!-- Metric 2 -->
+<div class="glass-card rounded-xl p-component-padding hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">Drafts Pending Review</span>
+<div class="w-8 h-8 rounded-full bg-status-info/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-status-info text-sm" data-icon="edit_document">edit_document</span>
+</div>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mb-1">38</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+                        Avg turn around: 2.4h
+                    </div>
+</div>
+<!-- Metric 3 -->
+<div class="glass-card rounded-xl p-component-padding hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">Needs Attention</span>
+<div class="w-8 h-8 rounded-full bg-status-warning/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-status-warning text-sm" data-icon="warning">warning</span>
+</div>
+</div>
+<div class="font-headline-lg text-headline-lg text-status-warning mb-1">7</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-status-warning">
+                        Missing donor info
+                    </div>
+</div>
+<!-- Metric 4 -->
+<div class="glass-card rounded-xl p-component-padding hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">Approved Drafts</span>
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mb-1 text-glow">89%</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+                        Approval rate
+                    </div>
+</div>
+</div>
+<!-- Bento Grid Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-panel-gap">
+<!-- Main Activity Panel -->
+<div class="lg:col-span-2 glass-panel rounded-xl flex flex-col h-[500px]">
+<div class="p-component-padding border-b border-border-highlight flex justify-between items-center backdrop-blur-2xl">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Recent Activity</h3>
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-fixed transition-colors">View All</button>
+</div>
+<div class="flex-1 overflow-y-auto p-component-padding space-y-4">
+<!-- Activity Item 1 -->
+<div class="flex gap-4 p-3 rounded-lg hover:bg-white/5 border border-transparent hover:border-border-highlight transition-all">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center border border-border-highlight shrink-0">
+<span class="material-symbols-outlined text-status-success text-sm" data-icon="volunteer_activism">volunteer_activism</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-body-md text-body-md text-on-surface font-semibold">Donation received</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2m ago</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">$5,000 from Sarah Jenkins for the Annual Fund.</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex gap-4 p-3 rounded-lg hover:bg-white/5 border border-transparent hover:border-border-highlight transition-all">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center border border-border-highlight shrink-0">
+<span class="material-symbols-outlined text-status-info text-sm" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-body-md text-body-md text-on-surface font-semibold">Draft generated</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant">15m ago</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">AI completed initial draft for Sarah Jenkins. Ready for review.</p>
+<button class="mt-2 px-3 py-1 bg-white/10 text-on-surface font-label-sm text-label-sm rounded-DEFAULT border border-border-highlight hover:bg-white/20 transition-colors">Review Draft</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Panel -->
+<div class="glass-panel rounded-xl flex flex-col h-[500px]">
+<div class="p-component-padding border-b border-border-highlight backdrop-blur-2xl">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">System Status</h3>
+</div>
+<div class="p-component-padding space-y-6 flex-1 flex flex-col justify-center">
+<div class="text-center">
+<div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 border border-primary/30 mb-4 shadow-[0_0_30px_rgba(78,222,163,0.2)]">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="model_training">model_training</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">AI Model Active</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Stewardship-v4 is running optimally.</p>
+</div>
+<div class="space-y-3 pt-6 border-t border-border-highlight">
+<div class="flex justify-between items-center font-label-md text-label-md">
+<span class="text-on-surface-variant">API Latency</span>
+<span class="text-primary">124ms</span>
+</div>
+<div class="flex justify-between items-center font-label-md text-label-md">
+<span class="text-on-surface-variant">Success Rate</span>
+<span class="text-primary">99.8%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

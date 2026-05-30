@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StewardshipAI - Draft Review</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#010f1f",
+                        "surface-glass": "rgba(30, 41, 59, 0.7)",
+                        "inverse-surface": "#d4e4fa",
+                        "on-tertiary-container": "#31394d",
+                        "on-surface-variant": "#bbcabf",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "tertiary": "#bec6e0",
+                        "on-secondary": "#233144",
+                        "secondary-container": "#3c4a5e",
+                        "on-tertiary": "#283044",
+                        "surface-bright": "#2c3a4c",
+                        "on-surface": "#d4e4fa",
+                        "status-error": "#ef4444",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "secondary": "#b9c7e0",
+                        "surface-tint": "#4edea3",
+                        "tertiary-container": "#9ba2bb",
+                        "background": "#051424",
+                        "on-primary-container": "#00422b",
+                        "on-primary-fixed": "#002113",
+                        "primary-container": "#10b981",
+                        "surface-dim": "#051424",
+                        "surface-container-highest": "#273647",
+                        "status-info": "#3b82f6",
+                        "inverse-primary": "#006c49",
+                        "primary": "#4edea3",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#1c2b3c",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "inverse-on-surface": "#233143",
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#0d1c2d",
+                        "status-success": "#22c55e",
+                        "outline": "#86948a",
+                        "surface-variant": "#273647",
+                        "status-warning": "#f59e0b",
+                        "on-tertiary-fixed": "#131b2e",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "on-primary": "#003824",
+                        "tertiary-fixed": "#dae2fd",
+                        "primary-fixed": "#6ffbbe",
+                        "on-primary-fixed-variant": "#005236",
+                        "border-highlight": "rgba(255, 255, 255, 0.12)",
+                        "background-base": "#0a0a0c",
+                        "outline-variant": "#3c4a42",
+                        "secondary-fixed": "#d5e3fd",
+                        "surface-container": "#122131",
+                        "on-secondary-container": "#abb9d2",
+                        "surface": "#051424",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "on-background": "#d4e4fa",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-error": "#690005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-width": "280px",
+                        "component-padding": "1rem",
+                        "section-padding": "2rem",
+                        "panel-gap": "1.5rem",
+                        "canvas-margin": "2rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Geist"],
+                        "headline-sm": ["Geist"],
+                        "label-sm": ["JetBrains Mono"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "body-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["28px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "500" }],
+                        "label-md": ["13px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-highlight);
+        }
+        .btn-primary {
+            background-color: #4edea3;
+            color: #003824;
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.2);
+            filter: brightness(1.1);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: all 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .input-glass {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #d4e4fa;
+            transition: all 0.2s ease;
+        }
+        .input-glass:focus {
+            border-color: #4edea3;
+            box-shadow: 0 0 0 4px rgba(78, 222, 163, 0.15);
+            outline: none;
+        }
+        .editor-glass {
+            background: rgba(255,255,255,0.95);
+            color: #051424;
+        }
+    </style>
+</head>
+<body class="bg-background-base text-on-surface min-h-screen flex overflow-hidden">
+<!-- Ambient Background Gradients -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute top-0 left-0 w-1/2 h-1/2 bg-surface-container opacity-50 blur-[100px] rounded-full mix-blend-screen transform -translate-x-1/4 -translate-y-1/4"></div>
+<div class="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[#00422b] opacity-30 blur-[120px] rounded-full mix-blend-screen transform translate-x-1/4 translate-y-1/4"></div>
+</div>
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen py-8 border-r border-border-highlight bg-surface-glass fixed left-0 top-0 w-sidebar-width backdrop-blur-xl shadow-2xl z-20">
+<div class="px-section-padding mb-8 flex items-center gap-4">
+<img alt="Organization Logo" class="w-10 h-10 rounded-full border border-border-highlight object-cover" data-alt="A small, stylized corporate logo consisting of interconnected geometric rings in vibrant emerald and deep navy tones. Set against a dark, premium glassmorphism interface background. Crisp, modern, and professional aesthetic suitable for a high-end AI SaaS platform. High contrast, sharp details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwj2kjOGF06DohfwmafVNRQOoMqcz8uZkHpXyZwVLrE7VPANnhfBrtT0J-_yuo4JX48y0_hM2BbgHFKOpPdmyeMvvxQHH7Tm27R8d2Zuwdw0t1Qf_IMxHDfFcBeZOtngIckph126z6RxqNXFJt0FuXVKkkdcxhoPBvZug-x_4xLkBFPbNqQP9iL0scciKaJdHdd7exYZ-f5YXh3LJmFXxtuWcgvU_gWr-j29wpkytoK_O38pgJhW524GASKeAlcK7bV6oKcLCAu6w"/>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface">Global Giving</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Premium Tier</p>
+</div>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full btn-primary font-label-md text-label-md py-3 rounded-lg flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Campaign
+            </button>
+</div>
+<div class="flex-1 flex flex-col gap-2 w-full">
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span class="font-label-md text-label-md">Create Test Donation</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span class="font-label-md text-label-md">Donation Records</span>
+</a>
+<a class="flex items-center gap-3 bg-primary/10 text-primary border-r-4 border-primary px-4 py-3 shadow-[0_0_15px_rgba(78,222,163,0.15)] translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">rate_review</span>
+<span class="font-label-md text-label-md">Draft Review Queue</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-2 w-full pt-4 border-t border-border-highlight px-4">
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:text-on-surface hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="font-label-md text-label-md">Sign Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-[280px] w-full min-h-screen relative z-10">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex justify-between items-center w-full px-section-padding h-16 sticky top-0 z-50 bg-surface-glass backdrop-blur-lg border-b border-border-highlight shadow-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">StewardshipAI</h1>
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined cursor-pointer hover:bg-white/5 transition-colors p-2 rounded-full">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-white/5 transition-colors p-2 rounded-full">settings</span>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-primary object-cover" data-alt="A tiny, circular portrait photo of a professional male user smiling, set against a dark glassmorphic user interface header. Premium SaaS aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWl3wQeAVUcWTEeQvTBXPM5xFILOXzAlYtBXBZopjWWyOOF1Wgh0b9qCZq-wZg7O4NzWHZ0AfvWmBePlUOAZsY2stNGXvjvDm-2r-2mUBshsr7sU-zypAp9YcgYRjZtaVy2G2Z__eVMOXTEDCFi8bmlU4HC5lHPIM2mPwZFFtrN7JP-UWKDryUGxjbZxm6M6gq09J5JAQj0pgF5sd74ZZ1RCKrUyRwTdU3eMzaTV-1BhLbyIJ2INwsfRsoUIQw_byWqEM8ZGWrQS0"/>
+</div>
+</header>
+<!-- Page Header (Desktop) -->
+<header class="hidden md:flex justify-between items-center w-full px-canvas-margin py-6 sticky top-0 z-40 bg-background-base/80 backdrop-blur-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Review Draft: #DRF-8492</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Reviewing AI-generated stewardship communication.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="btn-secondary px-4 py-2 rounded-lg font-label-md text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                    View History
+                </button>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto p-canvas-margin">
+<div class="max-w-[1600px] mx-auto grid grid-cols-1 xl:grid-cols-12 gap-panel-gap">
+<!-- Left Column: Context (5 cols) -->
+<div class="xl:col-span-5 flex flex-col gap-panel-gap">
+<!-- Donation Summary -->
+<div class="glass-card rounded-xl p-6 border-border-highlight">
+<div class="flex justify-between items-center mb-4 border-b border-border-highlight pb-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">payments</span>
+                                Donation Summary
+                            </h3>
+<span class="bg-status-success/20 text-status-success border border-status-success/30 px-3 py-1 rounded-full font-label-sm text-label-sm uppercase">Processed</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Amount</p>
+<p class="font-headline-md text-headline-md text-primary">$25,000.00</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Date</p>
+<p class="font-body-lg text-body-lg text-on-surface">Oct 24, 2023</p>
+</div>
+<div class="col-span-2">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Designation</p>
+<p class="font-body-md text-body-md text-on-surface">Clean Water Initiative - Sub-Saharan Africa</p>
+</div>
+</div>
+</div>
+<!-- Donor Context -->
+<div class="glass-card rounded-xl p-6 border-border-highlight">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2 mb-4 border-b border-border-highlight pb-3">
+<span class="material-symbols-outlined text-tertiary">person</span>
+                            Donor Context
+                        </h3>
+<div class="flex items-center gap-4 mb-5">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center border border-border-highlight font-headline-sm text-primary">
+                                 AS
+                             </div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface">Dr. Amelia Sterling</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Lifetime Giving: $145,000</p>
+</div>
+</div>
+<ul class="space-y-3 font-body-md text-body-md">
+<li class="flex items-start gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mt-0.5 text-primary">check_circle</span>
+<span>Attended Annual Gala (2022, 2023)</span>
+</li>
+<li class="flex items-start gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mt-0.5 text-primary">check_circle</span>
+<span>Prefers detailed impact reports.</span>
+</li>
+<li class="flex items-start gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mt-0.5 text-status-warning">warning</span>
+<span>Recent note: "Excited about the new well project."</span>
+</li>
+</ul>
+</div>
+<!-- AI Reasoning -->
+<div class="glass-card rounded-xl p-6 border-border-highlight relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/10 blur-[20px] rounded-full"></div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2 mb-4 border-b border-border-highlight pb-3">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+                            AI Reasoning
+                        </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                            StewardshipAI tailored this draft based on Dr. Sterling's recent major gift and her specific note regarding the well project. The tone is set to "Formal yet Grateful" matching her previous correspondence style.
+                        </p>
+<div class="bg-surface-container/50 p-3 rounded-lg border border-border-highlight">
+<p class="font-label-sm text-label-sm text-primary mb-1">Key Inclusions:</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-glass px-2 py-1 rounded text-[11px] font-label-sm border border-border-highlight">Well Project Mention</span>
+<span class="bg-surface-glass px-2 py-1 rounded text-[11px] font-label-sm border border-border-highlight">Impact Metric Ref</span>
+<span class="bg-surface-glass px-2 py-1 rounded text-[11px] font-label-sm border border-border-highlight">Gala Callback</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Editor & Actions (7 cols) -->
+<div class="xl:col-span-7 flex flex-col gap-panel-gap h-[calc(100vh-140px)]">
+<!-- Editor Card -->
+<div class="glass-card rounded-xl border-border-highlight flex flex-col flex-1 overflow-hidden">
+<!-- Editor Toolbar -->
+<div class="bg-surface-container-low px-4 py-3 border-b border-border-highlight flex items-center justify-between">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<button class="p-1.5 hover:bg-white/10 rounded transition-colors"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+<button class="p-1.5 hover:bg-white/10 rounded transition-colors"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+<button class="p-1.5 hover:bg-white/10 rounded transition-colors"><span class="material-symbols-outlined text-[18px]">format_list_bulleted</span></button>
+<div class="w-px h-5 bg-border-highlight mx-1"></div>
+<button class="p-1.5 hover:bg-white/10 rounded transition-colors text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">auto_awesome</span> <span class="font-label-sm text-[10px]">Rewrite</span></button>
+</div>
+<span class="font-label-sm text-label-sm text-status-warning flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">edit_note</span> Unsaved Changes
+                            </span>
+</div>
+<!-- Editor Content -->
+<div class="flex-1 p-6 bg-surface-container-lowest/50 overflow-y-auto">
+<div class="mb-6">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Subject Line</label>
+<input class="w-full input-glass rounded-lg px-4 py-2.5 font-body-md text-body-md" type="text" value="Thank you for your generous support of the Clean Water Initiative"/>
+</div>
+<div class="h-full flex flex-col">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Message Body</label>
+<textarea class="w-full flex-1 input-glass rounded-lg px-6 py-5 font-body-md text-body-md leading-relaxed resize-none focus:outline-none focus:ring-1 focus:ring-primary" spellcheck="false">Dear Dr. Sterling,
+
+I am writing to express my deepest gratitude for your incredibly generous recent contribution of $25,000 to our Clean Water Initiative. 
+
+Your continued support, especially following our wonderful conversations at the recent Annual Gala, is vital to our mission. I recall your specific excitement regarding the new well project in Sub-Saharan Africa. I am thrilled to share that your gift will directly fund the final phase of construction for three new community wells, bringing clean, accessible water to over 1,500 individuals.
+
+We are currently compiling a detailed impact report on the early stages of this project, and I will ensure a copy is sent to you personally next month. 
+
+Thank you once again for your remarkable dedication and for sharing our vision of a world with clean water for all.
+
+Warmest regards,
+
+[Sender Name]
+Director of Development
+Global Giving</textarea>
+</div>
+</div>
+</div>
+<!-- Action Panel -->
+<div class="glass-card rounded-xl p-4 border-border-highlight flex items-center justify-between bg-surface-container-highest shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
+<button class="btn-secondary px-6 py-3 rounded-lg font-label-md text-label-md text-status-error hover:bg-status-error/10 border-transparent hover:border-status-error/30 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">close</span>
+                            Reject Draft
+                        </button>
+<div class="flex gap-3">
+<button class="btn-secondary px-6 py-3 rounded-lg font-label-md text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                                Save Draft
+                            </button>
+<button class="btn-primary px-8 py-3 rounded-lg font-label-md text-label-md font-bold shadow-[0_0_20px_rgba(78,222,163,0.3)] flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">send</span>
+                                Approve &amp; Send
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
