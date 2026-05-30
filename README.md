@@ -2,10 +2,7 @@
 
 OpenPaws is a donor stewardship platform for creating synthetic donation records, reviewing AI-generated thank-you drafts, and managing the approval-and-send workflow for donor communication.
 
-![Client](https://img.shields.io/badge/Client-React%20%2B%20Vite-61DAFB?style=for-the-badge&logo=react&logoColor=000000)
-![Server](https://img.shields.io/badge/Server-Node.js%20%2B%20Express-68A063?style=for-the-badge&logo=node.js&logoColor=ffffff)
-![Database](https://img.shields.io/badge/Database-PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=ffffff)
-![Workflow](https://img.shields.io/badge/Workflow-Donation%20%2B%20Draft%20Review-0F172A?style=for-the-badge)
+<!-- Tech badges removed as requested -->
 
 ## Quick Summary
 
@@ -193,6 +190,14 @@ npm run seed
 - The email preview demonstrates the generated thank-you content as rendered in a mobile inbox: personalized salutation, explicit mention of the gift amount (e.g. `$100`), program designation ("Emergency Rescue Fund"), a concise gratitude paragraph, and a warm sign-off ("With heartfelt appreciation, OpenPaws"). This view highlights the importance of previewing drafts in mobile layouts for readability and line breaks.
 
 These visual notes map directly to product features: the dashboard for oversight, the Draft Review Queue for bulk and individual review workflows, and the email preview for final-quality checks before sending.
+
+### Embedded Screenshots
+
+Below are the screenshots referenced in the visual notes. If you prefer these stored in a subfolder, I can move them into `assets/screenshots/` and update links.
+
+![Dashboard](./Screenshot%202026-05-30%20161222.png)
+
+![Draft Review Queue](./Screenshot%202026-05-30%20161240.png)
 
 ## Data Model Summary
 
