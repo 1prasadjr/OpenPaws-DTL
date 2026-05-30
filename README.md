@@ -193,14 +193,14 @@ These visual notes map directly to product features: the dashboard for oversight
 
 ### Embedded Screenshots
 
-Below are the screenshots referenced in the visual notes. If you prefer these stored in a subfolder, I can move them into `assets/screenshots/` and update links.
+Below are the screenshots referenced in the visual notes and stored in `assets/screenshots/`.
 
-![Dashboard](./Screenshot%202026-05-30%20161222.png)
+![Dashboard](./assets/screenshots/Screenshot%202026-05-30%20161222.png)
 
-![Draft Review Queue](./Screenshot%202026-05-30%20161240.png)
+![Draft Review Queue](./assets/screenshots/Screenshot%202026-05-30%20161240.png)
 
 <div align="center">
-  <img src="./WhatsApp%20Image%202026-05-30%20at%204.13.50%20PM.jpeg" alt="Thank-you Email Preview (mobile)" width="320" />
+  <img src="./assets/screenshots/WhatsApp%20Image%202026-05-30%20at%204.13.50%20PM.jpeg" alt="Thank-you Email Preview (mobile)" width="320" />
 </div>
 
 ## Data Model Summary
