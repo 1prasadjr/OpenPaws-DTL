@@ -5,6 +5,7 @@ import {
   bulkApproveEmails,
   bulkSendEmails,
   createDonation,
+  getDashboardSummary,
   generateDraft,
   getDraftById,
   getDrafts,
@@ -216,20 +217,14 @@ function App() {
       try {
         setDashboard((current) => ({ ...current, loading: true, error: '' }));
 
-        const [donorsResponse, donationsResponse] = await Promise.all([
-          getDonors({ limit: 4 }),
-          getDonations({ limit: 50 }),
-        ]);
-
-        const donationRows = donationsResponse?.data || [];
-        const amountTotal = donationRows.reduce((sum, row) => sum + Number(row.amount || 0), 0);
+        const response = await getDashboardSummary();
 
         if (!cancelled) {
           setDashboard({
-            donorsTotal: donorsResponse?.pagination?.total || 0,
-            donationsTotal: donationsResponse?.pagination?.total || 0,
-            amountTotal,
-            recentDonations: donationRows.slice(0, 5),
+            donorsTotal: response?.data?.donorsTotal || 0,
+            donationsTotal: response?.data?.donationsTotal || 0,
+            amountTotal: Number(response?.data?.amountTotal || 0),
+            recentDonations: response?.data?.recentDonations || [],
             loading: false,
             error: '',
           });

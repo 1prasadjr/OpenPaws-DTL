@@ -2,6 +2,7 @@
   "name": "server",
   "private": true,
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "seed": "node prisma/seed.js"

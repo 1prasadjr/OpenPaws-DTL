@@ -18,6 +18,10 @@ async function request(path, options = {}) {
   return payload;
 }
 
+export function getDashboardSummary() {
+  return request('/api/dashboard/summary');
+}
+
 export function getDonors(params = {}) {
   const query = new URLSearchParams();
 

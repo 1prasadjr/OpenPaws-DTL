@@ -167,4 +167,6 @@ module.exports = {
   getDonationById,
   getDonationByDonationId,
   createDonation,
+  donationSelect,
+  shapeDonation,
 };
