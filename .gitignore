@@ -1,0 +1,8 @@
+.vite/
+.vscode/
+client/.env
+client/dist/
+client/node_modules/
+server/.env
+server/generated/prisma/
+server/node_modules/
