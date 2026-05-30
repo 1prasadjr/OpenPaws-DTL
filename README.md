@@ -1,6 +1,6 @@
 # OpenPaws Stewardship Workspace
 
-OpenPaws is a donor stewardship platform for creating synthetic donation records, reviewing AI-generated thank-you drafts, and managing the approval-and-send workflow for donor communication. The product combines a React client, an Express server, Prisma-backed persistence, OpenRouter-powered draft generation, and Gmail-based delivery.
+OpenPaws is a donor stewardship platform for creating synthetic donation records, reviewing AI-generated thank-you drafts, and managing the approval-and-send workflow for donor communication.
 
 ![Client](https://img.shields.io/badge/Client-React%20%2B%20Vite-61DAFB?style=for-the-badge&logo=react&logoColor=000000)
 ![Server](https://img.shields.io/badge/Server-Node.js%20%2B%20Express-68A063?style=for-the-badge&logo=node.js&logoColor=ffffff)
@@ -178,42 +178,21 @@ cd server
 npm run seed
 ```
 
-## Repository Structure
+## Screenshots & Visual Notes
 
-```text
-DTL-OpenPaws/
-├─ client/
-│  ├─ index.html
-│  ├─ package.json
-│  ├─ tailwind.config.cjs
-│  ├─ vite.config.js
-│  └─ src/
-│     ├─ App.jsx
-│     ├─ main.jsx
-│     ├─ mock.js
-│     ├─ styles.css
-│     └─ lib/
-│        └─ api.js
-├─ server/
-│  ├─ package.json
-│  ├─ prisma/
-│  │  ├─ schema.prisma
-│  │  └─ seed.js
-│  └─ src/
-│     ├─ app.js
-│     ├─ server.js
-│     ├─ config/
-│     │  ├─ openrouter.js
-│     │  └─ prisma.js
-│     ├─ controllers/
-│     ├─ middleware/
-│     ├─ routes/
-│     ├─ services/
-│     └─ utils/
-├─ donor_thank_you_synthetic_seed_data.json
-├─ prompts.txt
-└─ synthetic_seed_data_instructions.md
-```
+### Dashboard
+
+- The dashboard uses a dark "glass" aesthetic with a compact left navigation and a focused top bar. Key summary cards show counts and totals (example: "Donors synced" = 25, "Donations synced" = 51, "Captured amount" ≈ $23,475) along with a recent activity feed. Primary CTAs include `Open records` and `Preview review queue` to move quickly into workflows.
+
+### Draft Review Queue
+
+- The Draft Review Queue presents a tabular list of donation drafts with columns for `Donor`, `Donation`, `Review`, `Email`, `Match`, and `Actions`. Rows show review status (e.g. `APPROVED`), email send state (`SENT`), and match classification (`MATCHED` / `NO MATCH`). Action buttons include `Open` for detail and `Regenerate` to request a new draft.
+
+### Thank-you Email Preview (mobile)
+
+- The email preview demonstrates the generated thank-you content as rendered in a mobile inbox: personalized salutation, explicit mention of the gift amount (e.g. `$100`), program designation ("Emergency Rescue Fund"), a concise gratitude paragraph, and a warm sign-off ("With heartfelt appreciation, OpenPaws"). This view highlights the importance of previewing drafts in mobile layouts for readability and line breaks.
+
+These visual notes map directly to product features: the dashboard for oversight, the Draft Review Queue for bulk and individual review workflows, and the email preview for final-quality checks before sending.
 
 ## Data Model Summary
 
