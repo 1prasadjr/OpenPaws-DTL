@@ -27,6 +27,23 @@ The application is structured around three core experiences:
 5. The draft can be reviewed, edited, saved, approved, rejected, or sent.
 6. Final workflow state is persisted so records and review views stay aligned with the latest action.
 
+## Database & Persistence
+
+The backend uses PostgreSQL through Prisma to store the working data that powers the stewardship workflow. At a high level, the database layer handles three things:
+
+1. Donation records are written when synthetic test donations are created.
+2. Draft records are updated as drafts move through review, approval, rejection, and send states.
+3. Email logs are stored so the send history stays traceable and can be reviewed later.
+
+The practical flow is:
+
+- Client action -> Express API
+- Express API -> Prisma models
+- Prisma models -> PostgreSQL tables
+- Database result -> refreshed dashboard, records, and review views
+
+This keeps the app consistent across page reloads and makes the dashboard, records table, and draft queue reflect the same source of truth.
+
 ### Flow Diagram
 
 ```mermaid
