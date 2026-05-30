@@ -63,7 +63,7 @@ Seed behavior:
    - donors inserted
    - donations inserted
    - no-match donations inserted
-   - seed completed
+   - seed completed 
 
 Important DB mapping:
 - Do not manually insert id.

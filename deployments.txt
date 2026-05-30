@@ -1,0 +1,110 @@
+se this order: deploy Render first, then deploy Vercel second. That gives the frontend a stable backend URL to point at, and it avoids the refresh 404 issue because the Vercel app now has SPA rewrites in vercel.json.
+
+1. Deploy the backend on Render first
+
+Create a new Render Web Service from the server folder.
+Set the build command to npm install.
+Set the start command to npm start.
+Add all required environment variables on Render:
+DATABASE_URL
+OPENROUTER_API_KEY
+OPENROUTER_MODEL
+OPENROUTER_FALLBACK_MODEL
+OPENROUTER_SITE_URL
+OPENROUTER_APP_NAME
+Gmail variables if you use email sending
+Deploy and wait until the service is live.
+Copy the Render service URL, for example https://your-service.onrender.com.
+
+2. Update the client to point at Render
+
+In Vercel, set VITE_API_BASE_URL to the Render URL you copied.
+This is what makes the frontend call the deployed backend instead of localhost.
+If you later change the Render URL, update this env var and redeploy Vercel.
+
+3. Deploy the frontend on Vercel
+
+Create a new Vercel project from the client folder.
+Set the build command to npm run build.
+Set the output directory to dist.
+Add the environment variable:
+VITE_API_BASE_URL=https://your-service.onrender.com
+Deploy.
+
+4. Verify the sync between both platforms
+
+Open the Vercel site and confirm the dashboard loads.
+Refresh on a nested route like /drafts/new or /reviews.
+It should no longer 404 because of the SPA rewrite in vercel.json.
+Trigger one backend action, such as loading dashboard data, to confirm the Vercel frontend is calling Render correctly.
+If the backend changes later, Render will auto-deploy and Vercel usually does not need changes unless the backend URL changes.
+
+5. Recommended deployment flow for future updates
+
+Push backend changes.
+Let Render deploy first.
+If the backend URL changes, update VITE_API_BASE_URL in Vercel.
+Push frontend changes.
+Let Vercel deploy after the backend is stable.
+If you want, I can also give you the exact Render and Vercel dashboard values to paste in, field by field.
+
+
+BACKEND ==
+
+Step-by-step Render backend deploy
+
+Push your latest code to GitHub first.
+The backend changes are already in main, and the server entry is server.js.
+
+In Render, create a new Web Service.
+
+Connect the GitHub repo and select OpenPaws-DTL.
+
+Set the root directory to:
+
+server
+Use these commands:
+
+Build command: npm install
+Start command: npm start
+Choose the Node environment:
+
+Runtime: Node
+Add the required environment variables in Render:
+
+DATABASE_URL
+OPENROUTER_API_KEY
+OPENROUTER_MODEL
+OPENROUTER_FALLBACK_MODEL
+OPENROUTER_SITE_URL
+OPENROUTER_APP_NAME
+GMAIL_CLIENT_ID
+GMAIL_CLIENT_SECRET
+GMAIL_REDIRECT_URI
+GMAIL_REFRESH_TOKEN
+GMAIL_SENDER_EMAIL
+PORT is optional on Render, but safe to leave unset because Render injects it
+If you need a database, create a Render PostgreSQL instance first and copy its connection string into DATABASE_URL.
+
+Deploy the service.
+
+After it starts, test the health endpoint:
+
+https://your-render-service.onrender.com/api/health
+Why this order matters
+
+The server must be live first so the frontend can point to a real API URL.
+The app uses Prisma in prisma.js, so DATABASE_URL must be valid before the server can boot.
+The server now has postinstall: prisma generate in package.json, so Prisma client generation happens automatically during install.
+Recommended Render settings
+
+Web Service name: anything you want
+Root directory: server
+Build command: npm install
+Start command: npm start
+Health check path: /api/health
+After Render succeeds
+
+Copy the Render service URL.
+Put that URL into Vercel as VITE_API_BASE_URL.
+Then deploy the client.
